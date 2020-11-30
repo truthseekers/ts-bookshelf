@@ -1,8 +1,8 @@
 import * as React from "react";
-import * as auth from "../auth-provider";
-import { useAsync } from "../utils/hooks";
-import { client } from "../utils/api-client";
 import { queryCache } from "react-query";
+import * as auth from "../auth-provider";
+import { client } from "../utils/api-client";
+import { useAsync } from "../utils/hooks";
 import { FullPageSpinner, FullPageErrorFallback } from "../components/lib";
 
 async function bootstrapAppData() {
@@ -40,18 +40,28 @@ function AuthProvider(props) {
     run(appDataPromise);
   }, [run]);
 
-  const login = "login";
-  // const login = React.useCallback(
-  //   (form) => auth.login(form).then((user) => setData(user)),
-  //   [setData]
-  // );
+  // const login = "login";
+  const login = React.useCallback(
+    (form) => auth.login(form).then((user) => setData(user)),
+    [setData]
+  );
   const register = React.useCallback(
     (form) => auth.register(form).then((user) => setData(user)),
     [setData]
   );
 
-  //   const value = "yes";
-  const value = React.useMemo(() => ({ login, register }), [login, register]);
+  const logout = React.useCallback(() => {
+    auth.logout();
+    queryCache.clear();
+    setData(null);
+  }, [setData]);
+
+  const value = React.useMemo(() => ({ user, login, logout, register }), [
+    login,
+    logout,
+    register,
+    user,
+  ]);
 
   if (isLoading || isIdle) {
     return <FullPageSpinner />;

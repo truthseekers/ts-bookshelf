@@ -1,9 +1,13 @@
+/** @jsxImportSource @emotion/react */
+import { jsx } from "@emotion/react";
+
 import styled from "@emotion/styled/macro";
+import { Link as RouterLink } from "react-router-dom";
 import { keyframes } from "@emotion/react";
-import { FaSpinner } from "react-icons/fa";
 import * as colors from "../styles/colors"; // should be able to get like this: import * as colors from 'styles/colors'
-import { Dialog as ReachDialog } from "@reach/dialog";
 import * as mq from "../styles/media-queries"; // should be able to: import * as mq from 'styles/media-queries'
+import { Dialog as ReachDialog } from "@reach/dialog";
+import { FaSpinner } from "react-icons/fa";
 
 const spin = keyframes({
   "0%": { transform: "rotate(0deg)" },
@@ -23,6 +27,14 @@ const CircleButton = styled.button({
   color: colors.text,
   border: `1px solid ${colors.gray10}`,
   cursor: "pointer",
+});
+
+const BookListUL = styled.ul({
+  listStyle: "none",
+  padding: "0",
+  display: "grid",
+  gridTemplateRows: "repeat(auto-fill, minmax(100px, 1fr))",
+  gridGap: "1em",
 });
 
 const Spinner = styled(FaSpinner)({
@@ -60,6 +72,7 @@ const inputStyles = {
 };
 
 const Input = styled.input({ borderRadius: "3px" }, inputStyles);
+const Textarea = styled.textarea(inputStyles);
 
 const Dialog = styled(ReachDialog)({
   maxWidth: "450px",
@@ -94,6 +107,14 @@ function FullPageSpinner() {
     </div>
   );
 }
+
+const Link = styled(RouterLink)({
+  color: colors.indigo,
+  ":hover": {
+    color: colors.indigoDarken10,
+    textDecoration: "underline",
+  },
+});
 
 const errorMessageVariants = {
   stacked: { display: "block" },
@@ -140,13 +161,16 @@ function FullPageErrorFallback({ error }) {
 }
 
 export {
-  Button,
-  CircleButton,
-  Dialog,
-  ErrorMessage,
-  FormGroup,
   FullPageErrorFallback,
-  Input,
+  ErrorMessage,
+  CircleButton,
+  BookListUL,
   Spinner,
+  Button,
+  Input,
+  Textarea,
+  Dialog,
+  FormGroup,
   FullPageSpinner,
+  Link,
 };

@@ -15,6 +15,10 @@ function handleUserResponse({ user }) {
   return user;
 }
 
+function login({ username, password }) {
+  return client("login", { username, password }).then(handleUserResponse);
+}
+
 function register({ username, password }) {
   return client("register", { username, password }).then(handleUserResponse);
 }
@@ -46,4 +50,4 @@ async function client(endpoint, data) {
     });
 }
 
-export { getToken, register, logout };
+export { getToken, login, register, logout, localStorageKey };
