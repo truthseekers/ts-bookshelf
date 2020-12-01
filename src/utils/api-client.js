@@ -23,6 +23,9 @@ async function client(
   return window
     .fetch(`${apiURL}/${endpoint}`, config)
     .then(async (response) => {
+      console.log(`response from apiURL: ${apiURL}, endpoint: ${endpoint}: `); //4
+      console.log(response); // 5
+      console.log("and config: ", config); // 6
       if (response.status === 401) {
         queryCache.clear();
         await auth.logout();
@@ -31,6 +34,7 @@ async function client(
         return Promise.reject({ message: "Please re-authenticate." });
       }
       const data = await response.json();
+      console.log("end of response. data: ", data);
       if (response.ok) {
         return data;
       } else {
