@@ -1,5 +1,7 @@
+import { ListItemList } from "../components/list-item-list";
+
 function ReadingListScreen() {
-  return <div>reading list</div>;
+  return <ListItemList />;
 }
 
 export { ReadingListScreen };
