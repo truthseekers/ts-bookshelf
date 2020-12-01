@@ -46,6 +46,7 @@ async function client(endpoint, data) {
   };
 
   console.log("CONFIG IS IN!: ", endpoint);
+  console.log("CONFIG!: ", config);
   return window
     .fetch(`${authURL}/${endpoint}`, config)
     .then(async (response) => {
