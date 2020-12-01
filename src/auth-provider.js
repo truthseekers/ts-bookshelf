@@ -31,23 +31,48 @@ async function logout() {
 // so that's why we're not just reusing the client
 const authURL = process.env.REACT_APP_AUTH_URL;
 
+const bodyData = {
+  name: "Juicy",
+  password: "pass123",
+};
+
 async function client(endpoint, data) {
+  console.log("in client");
   const config = {
     method: "POST",
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" },
   };
 
+  console.log("authURL: ", authURL);
+  // return "poop?";
   return window
-    .fetch(`${authURL}/${endpoint}`, config)
-    .then(async (response) => {
-      const data = await response.json();
-      if (response.ok) {
-        return data;
-      } else {
-        return Promise.reject(data);
-      }
+    .fetch("http://localhost:3001/register", {
+      method: "POST",
+      mode: "cors",
+      // cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bodyData),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("still worked worked? data: ", data);
+      // this.setState({ hits: data.hits });
     });
+
+  // return window
+  //   .fetch(`${authURL}/${endpoint}`, config)
+  //   .then(async (response) => {
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       return data;
+  //     } else {
+  //       return Promise.reject(data);
+  //     }
+  //   });
 }
 
 export { getToken, login, register, logout, localStorageKey };

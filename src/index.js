@@ -13,12 +13,12 @@ import { AppProviders } from "./context";
 // import 'bootstrap/dist/css/bootstrap-reboot.css'  // this is done in course but haven't figured this out yet. "resets" stuff.
 
 ReactDOM.render(
-  <App />,
-  // <Profiler id="App Root" phases={["mount"]}>
-  //   <AppProviders>
-  //     <App />
-  //   </AppProviders>
-  // </Profiler>,
+  // <App />,
+  <Profiler id="App Root" phases={["mount"]}>
+    <AppProviders>
+      <App />
+    </AppProviders>
+  </Profiler>,
   document.getElementById("root")
 );
 
