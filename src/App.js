@@ -1,91 +1,40 @@
-import * as React from "react";
+import React, { lazy } from "react";
 import { useAuth } from "./context/auth-context";
 import { FullPageSpinner } from "./components/lib";
+import UnauthenticatedApp from "./unauthenticated-app";
+import AuthenticatedApp from "./authenticated-app";
 
-const AuthenticatedApp = React.lazy(() =>
-  import(/* webpackPrefetch: true */ "./authenticated-app")
-);
-// import "./App.css";
-const UnauthenticatedApp = React.lazy(() => import("./unauthenticated-app"));
-
-// const API = "https://hn.algolia.com/api/v1/search?query=";
-// const DEFAULT_QUERY = "redux";
-
-const bodyData = {
-  name: "Juicy",
-  password: "pass123",
-};
-
-function MyComponent() {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     hits: [],
-  //   };
-  // }
-
-  // componentDidMount() {
-  // console.log("whaa");
-
-  React.useEffect(() => {
-    window
-      .fetch("http://localhost:3001/register", {
-        method: "POST",
-        mode: "cors",
-        // cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bodyData),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("still worked worked? data: ", data);
-        // this.setState({ hits: data.hits });
-      });
-  });
-
-  return <div>MyComponent</div>;
-}
-
-// componentDidMount() {
-//   console.log("whaa");
-//   fetch(API + DEFAULT_QUERY)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       console.log("worked? data: ", data);
-//       this.setState({ hits: data.hits });
-//     });
-// }
-
-// componentDidMount() {
-//   // const apiUrl = "https://api.github.com/users/hacktivist123/repos";
-//   const apiUrl = "http://localhost:3001/register";
-//   window
-//     .fetch(apiUrl, {
-//       method: "POST",
-//       mode: "cors",
-//       credentials: "omit",
-//       body: JSON.stringify(bodyData),
+// const AuthenticatedApp = lazy(
+//   () =>
+//     new Promise((resolve, reject) => {
+//       import("./authenticated-app")
+//         .then((result) =>
+//           resolve(result.default ? result : { default: result })
+//         )
+//         .catch(reject);
 //     })
-//     .then((response) => response.json())
-//     .then((data) => console.log("JUST REGISTER This is your data", data));
-// }
-// render() {
-//   return <h1>my Component has Mounted, Check the browser 'console' </h1>;
-// }
-// }
+// );
+
+// const UnauthenticatedApp = lazy(
+//   () =>
+//     new Promise((resolve, reject) => {
+//       import("./unauthenticated-app")
+//         .then((result) =>
+//           resolve(result.default ? result : { default: result })
+//         )
+//         .catch(reject);
+//     })
+// );
+// const AuthenticatedApp = lazy(() => import("./authenticated-app"));
+// import "./App.css";
+// const UnauthenticatedApp = lazy(() => import("./unauthenticated-app"));
 
 function App() {
+  // const user = null;
   const { user } = useAuth();
-  return (
-    // <MyComponent />
-    <React.Suspense fallback={<FullPageSpinner />}>
-      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
-    </React.Suspense>
-  );
+  console.log("user from app: ", user);
+  // return <UnauthenticatedApp />;
+  return <div>{user ? <AuthenticatedApp /> : <UnauthenticatedApp />}</div>;
 }
 
 export { App };

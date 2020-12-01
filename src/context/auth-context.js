@@ -10,6 +10,7 @@ async function bootstrapAppData() {
 
   const token = await auth.getToken();
   if (token) {
+    console.log("token in bootstrapAppData: ", token);
     const data = await client("bootstrap", { token });
     queryCache.setQueryData("list-items", data.listItems, {
       staleTime: 5000,

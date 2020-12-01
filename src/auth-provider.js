@@ -11,6 +11,7 @@ async function getToken() {
 }
 
 function handleUserResponse({ user }) {
+  console.log("full object user: ", user);
   window.localStorage.setItem(localStorageKey, user.token);
   return user;
 }
@@ -45,37 +46,22 @@ async function client(endpoint, data) {
   };
 
   console.log("CONFIG IS IN!: ", endpoint);
-  // return "poop?";
   return window
-    .fetch(
-      `${authURL}/${endpoint}`,
-      config /*{
-      method: "POST",
-      mode: "cors",
-      // cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(bodyData),
-    }*/
-    )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("authURL worked worked? data: ", data);
-      // this.setState({ hits: data.hits });
+    .fetch(`${authURL}/${endpoint}`, config)
+    .then(async (response) => {
+      const data = await response.json();
+      if (response.ok) {
+        console.log("response is good. can't return yet tho id ont thinkg");
+        console.log("data: ", data);
+        return data;
+      } else {
+        return Promise.reject(data);
+      }
     });
-
-  // return window
-  //   .fetch(`${authURL}/${endpoint}`, config)
-  //   .then(async (response) => {
-  //     const data = await response.json();
-  //     if (response.ok) {
-  //       return data;
-  //     } else {
-  //       return Promise.reject(data);
-  //     }
-  //   });
+  // .then((data) => {
+  //   console.log("authURL worked worked? data: ", data);
+  //   // this.setState({ hits: data.hits });
+  // });
 }
 
 export { getToken, login, register, logout, localStorageKey };

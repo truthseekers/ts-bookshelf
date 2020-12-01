@@ -17,6 +17,9 @@ async function client(
     ...customConfig,
   };
 
+  console.log("ypu here it is");
+  console.log("apiURL: ", apiURL);
+  console.log("endpoint: ", endpoint);
   return window
     .fetch(`${apiURL}/${endpoint}`, config)
     .then(async (response) => {

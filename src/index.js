@@ -14,11 +14,11 @@ import { AppProviders } from "./context";
 
 ReactDOM.render(
   // <App />,
-  <Profiler id="App Root" phases={["mount"]}>
-    <AppProviders>
-      <App />
-    </AppProviders>
-  </Profiler>,
+  // <Profiler id="App Root" phases={["mount"]}>
+  <AppProviders>
+    <App />
+  </AppProviders>,
+  // </Profiler>,
   document.getElementById("root")
 );
 
