@@ -8,6 +8,7 @@ import { useAuth } from "./context/auth-context";
 import { ReadingListScreen } from "./screens/reading-list";
 import * as mq from "./styles/media-queries";
 import * as colors from "./styles/colors";
+import { DiscoverBooksScreen } from "./screens/discover";
 
 function ErrorFallback({ error }) {
   return (
@@ -150,7 +151,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/list" element={<ReadingListScreen />} />
       {/* <Route path="/finished" element={<FinishedScreen />} /> */}
-      {/* <Route path="/discover" element={<DiscoverBooksScreen />} /> */}
+      <Route path="/discover" element={<DiscoverBooksScreen />} />
       {/* <Route path="/book/:bookId" element={<BookScreen />} /> */}
       {/* <Route path="*" element={<NotFoundScreen />} /> */}
     </Routes>
