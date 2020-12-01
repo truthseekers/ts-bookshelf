@@ -44,10 +44,12 @@ async function client(endpoint, data) {
     headers: { "Content-Type": "application/json" },
   };
 
-  console.log("authURL: ", authURL);
+  console.log("CONFIG IS IN!: ", endpoint);
   // return "poop?";
   return window
-    .fetch("http://localhost:3001/register", {
+    .fetch(
+      `${authURL}/${endpoint}`,
+      config /*{
       method: "POST",
       mode: "cors",
       // cache: "no-cache",
@@ -56,10 +58,11 @@ async function client(endpoint, data) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(bodyData),
-    })
+    }*/
+    )
     .then((response) => response.json())
     .then((data) => {
-      console.log("still worked worked? data: ", data);
+      console.log("authURL worked worked? data: ", data);
       // this.setState({ hits: data.hits });
     });
 
