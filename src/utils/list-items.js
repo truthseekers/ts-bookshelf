@@ -7,22 +7,26 @@ function useListItem(bookId, options) {
   return listItems?.find((li) => li.bookId === bookId) ?? null;
 }
 
-function useListItems() {
+function useListItems({ onSuccess, ...options } = {}) {
   const client = useClient();
 
-  //   const { data: listItems } = useQuery({
-  //     queryKey: "list-items",
-  //     queryFn: () => client("list-items").then((data) => data.listItems),
-  //     onSuccess: async (listItems) => {
-  //       console.log("on success?");
-  //       await onSuccess?.(listItems);
-  //       for (const listItem of listItems) {
-  //         setQueryDataForBook(listItem.book);
-  //       }
-  //     },
-  //     ...options,
-  //   });
-  //   return listItems ?? [];
+  const { data: listItems } = useQuery({
+    queryKey: "list-items",
+    queryFn: () =>
+      client("list-items").then((data) => {
+        console.log("in query of useListItems. data: ", data);
+        return data.listItems;
+      }),
+    onSuccess: async (listItems) => {
+      console.log("on success?");
+      await onSuccess?.(listItems);
+      for (const listItem of listItems) {
+        setQueryDataForBook(listItem.book);
+      }
+    },
+    ...options,
+  });
+  return listItems ?? [];
   return [];
 }
 
