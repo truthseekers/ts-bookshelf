@@ -61,4 +61,43 @@ function useUpdateListItem(options) {
   );
 }
 
-export { useListItem, useListItems, useUpdateListItem };
+function useRemoveListItem(options) {
+  const client = useClient();
+
+  return useMutation(
+    ({ id }) => client(`list-items/${id}`, { method: "DELETE" }),
+    {
+      onMutate: (removedItem) => {
+        const previousItems = queryCache.getQueryData("list-items");
+
+        queryCache.setQueryData("list-items", (old) => {
+          return old.filter((item) => item.id !== removedItem.id);
+        });
+
+        return () => queryCache.setQueryData("list-items", previousItems);
+      },
+      ...defaultMutationOptions,
+      ...options,
+    }
+  );
+}
+
+function useCreateListItem(options) {
+  const client = useClient();
+
+  return useMutation(
+    ({ bookId }) => client("list-items", { data: { bookId } }),
+    {
+      ...defaultMutationOptions,
+      ...options,
+    }
+  );
+}
+
+export {
+  useListItem,
+  useListItems,
+  useUpdateListItem,
+  useRemoveListItem,
+  useCreateListItem,
+};
