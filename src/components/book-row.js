@@ -15,8 +15,8 @@ function BookRow({ book }) {
 
   // console.log("book in BookRow: ", book);
   // console.log("coverimage: ", coverImageUrl);
-  console.log("synopsis type: ");
-  console.log(typeof book.synopsis);
+  // console.log("synopsis type: ");
+  // console.log(typeof book.synopsis);
   return (
     <div
       css={{
