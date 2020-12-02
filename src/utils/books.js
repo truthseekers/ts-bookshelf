@@ -1,5 +1,20 @@
 import { useClient } from "../context/auth-context";
 import { useQuery, queryCache } from "react-query";
+import bookPlaceholderSvg from "../assets/book-placeholder.svg";
+
+const loadingBook = {
+  title: "Loading...",
+  author: "loading...",
+  coverImageUrl: bookPlaceholderSvg,
+  publisher: "Loading Publishing",
+  synopsis: "Loading...",
+  loadingBook: true,
+};
+
+const loadingBooks = Array.from({ length: 10 }, (v, index) => ({
+  id: `loading-book-${index}`,
+  ...loadingBook,
+}));
 
 const bookQueryConfig = {
   staleTime: 1000 * 60 * 60,
@@ -31,7 +46,7 @@ function useBookSearch(query) {
   const client = useClient();
   const result = useQuery(getBookSearchConfig(client, query));
   console.log("useBookSearch result: ", result);
-  return { books: [] };
+  return { ...result, books: result.data ?? loadingBooks };
 }
 
 function setQueryDataForBook(book) {
