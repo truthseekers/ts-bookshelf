@@ -1,5 +1,9 @@
+function useBookSearch(query) {
+  return "";
+}
+
 function setQueryDataForBook(book) {
   //...
 }
 
-export { setQueryDataForBook };
+export { useBookSearch, setQueryDataForBook };
