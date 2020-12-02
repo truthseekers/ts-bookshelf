@@ -1,5 +1,5 @@
 function useBookSearch(query) {
-  return "";
+  return { books: [] };
 }
 
 function setQueryDataForBook(book) {
