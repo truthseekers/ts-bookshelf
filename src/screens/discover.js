@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { jsx } from "@emotion/react";
+
 import * as React from "react";
 import * as colors from "../styles/colors";
 import { FaSearch, FaTimes } from "react-icons/fa";
@@ -10,6 +13,8 @@ function DiscoverBooksScreen() {
   const [query, setQuery] = React.useState("");
   const [queried, setQueried] = React.useState();
   const { books, error, isLoading, isError, isSuccess } = useBookSearch(query);
+
+  // console.log("query: ", query);
 
   function handleSearchClick(event) {
     event.preventDefault();

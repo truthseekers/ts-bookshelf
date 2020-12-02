@@ -2,6 +2,11 @@ import { useClient } from "../context/auth-context";
 import { useQuery } from "react-query";
 import { setQueryDataForBook } from "./books";
 
+function useListItem(bookId, options) {
+  const listItems = useListItems(options);
+  return listItems?.find((li) => li.bookId === bookId) ?? null;
+}
+
 function useListItems() {
   const client = useClient();
 
@@ -21,4 +26,4 @@ function useListItems() {
   return [];
 }
 
-export { useListItems };
+export { useListItem, useListItems };

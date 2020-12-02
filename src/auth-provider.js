@@ -11,7 +11,7 @@ async function getToken() {
 }
 
 function handleUserResponse({ user }) {
-  console.log("full object user: ", user);
+  // console.log("full object user: ", user);
   window.localStorage.setItem(localStorageKey, user.token);
   return user;
 }
@@ -38,22 +38,22 @@ const bodyData = {
 };
 
 async function client(endpoint, data) {
-  console.log("in client");
+  // console.log("in client");
   const config = {
     method: "POST",
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" },
   };
 
-  console.log("CONFIG IS IN!: ", endpoint);
-  console.log("CONFIG!: ", config);
+  // console.log("CONFIG IS IN!: ", endpoint);
+  // console.log("CONFIG!: ", config);
   return window
     .fetch(`${authURL}/${endpoint}`, config)
     .then(async (response) => {
       const data = await response.json();
       if (response.ok) {
-        console.log("response is good. can't return yet tho id ont thinkg");
-        console.log("data: ", data);
+        // console.log("response is good. can't return yet tho id ont thinkg");
+        // console.log("data: ", data);
         return data;
       } else {
         return Promise.reject(data);

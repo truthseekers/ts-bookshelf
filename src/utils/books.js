@@ -25,12 +25,12 @@ const getBookSearchConfig = (client, query) => ({
   queryKey: ["bookSearch", { query }],
   queryFn: () =>
     client(`books?query=${encodeURIComponent(query)}`).then((data) => {
-      console.log("in queryFn. data: ", data);
+      // console.log("in queryFn. data: ", data);
       return data.books;
     }),
   config: {
     onSuccess(books) {
-      console.log("onSuccess books ts: ", books);
+      // console.log("onSuccess books ts: ", books);
       for (const book of books) {
         queryCache.setQueryData(
           ["book", { bookId: book.id }],
@@ -45,7 +45,7 @@ const getBookSearchConfig = (client, query) => ({
 function useBookSearch(query) {
   const client = useClient();
   const result = useQuery(getBookSearchConfig(client, query));
-  console.log("useBookSearch result: ", result);
+  // console.log("useBookSearch result: ", result);
   return { ...result, books: result.data ?? loadingBooks };
 }
 
