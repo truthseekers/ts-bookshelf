@@ -14,7 +14,7 @@ function DiscoverBooksScreen() {
   function handleSearchClick(event) {
     event.preventDefault();
     setQueried(true);
-    // setQuery(event.target.elements.search.value)
+    setQuery(event.target.elements.search.value);
   }
 
   return (
