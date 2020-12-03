@@ -34,7 +34,7 @@ async function client(
         return Promise.reject({ message: "Please re-authenticate." });
       }
       const data = await response.json();
-      console.log("end of response. data: ", data);
+      // console.log("end of response. data: ", data);
       if (response.ok) {
         return data;
       } else {

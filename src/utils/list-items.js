@@ -14,11 +14,11 @@ function useListItems({ onSuccess, ...options } = {}) {
     queryKey: "list-items",
     queryFn: () =>
       client("list-items").then((data) => {
-        console.log("in query of useListItems. data: ", data);
+        // console.log("in query of useListItems. data: ", data);
         return data.listItems;
       }),
     onSuccess: async (listItems) => {
-      console.log("on success?");
+      // console.log("on success?");
       await onSuccess?.(listItems);
       for (const listItem of listItems) {
         setQueryDataForBook(listItem.book);

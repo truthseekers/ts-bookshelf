@@ -5,7 +5,7 @@ import { BookRow } from "./book-row";
 function ListItemList({ filterListItems, noListItems, noFilteredListItems }) {
   const listItems = useListItems();
 
-  console.log("listItems: ", listItems);
+  // console.log("listItems: ", listItems);
 
   const filteredListItems = listItems.filter(filterListItems);
 

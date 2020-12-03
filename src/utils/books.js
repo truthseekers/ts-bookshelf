@@ -49,8 +49,22 @@ function useBookSearch(query) {
   return { ...result, books: result.data ?? loadingBooks };
 }
 
+function useBook(bookId) {
+  const client = useClient();
+  const { data } = useQuery({
+    queryKey: ["book", { bookId }],
+    queryFn: () =>
+      client(`books/${bookId}`).then((data) => {
+        console.log("data.book after useBook: ", data);
+        return data.book;
+      }),
+    ...bookQueryConfig,
+  });
+  return data ?? loadingBook;
+}
+
 function setQueryDataForBook(book) {
   //...
 }
 
-export { useBookSearch, setQueryDataForBook };
+export { useBookSearch, setQueryDataForBook, useBook };

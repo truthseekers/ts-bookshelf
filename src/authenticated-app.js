@@ -9,6 +9,8 @@ import { ReadingListScreen } from "./screens/reading-list";
 import * as mq from "./styles/media-queries";
 import * as colors from "./styles/colors";
 import { DiscoverBooksScreen } from "./screens/discover";
+import { FinishedScreen } from "./screens/finished";
+import { BookScreen } from "./screens/book";
 
 function ErrorFallback({ error }) {
   return (
@@ -150,9 +152,9 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/list" element={<ReadingListScreen />} />
-      {/* <Route path="/finished" element={<FinishedScreen />} /> */}
+      <Route path="/finished" element={<FinishedScreen />} />
       <Route path="/discover" element={<DiscoverBooksScreen />} />
-      {/* <Route path="/book/:bookId" element={<BookScreen />} /> */}
+      <Route path="/book/:bookId" element={<BookScreen />} />
       {/* <Route path="*" element={<NotFoundScreen />} /> */}
     </Routes>
   );
