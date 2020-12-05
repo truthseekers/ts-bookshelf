@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { jsx } from "@emotion/react";
+
 import * as React from "react";
 import { queryCache } from "react-query";
 import * as auth from "../auth-provider";
@@ -10,7 +13,6 @@ async function bootstrapAppData() {
 
   const token = await auth.getToken();
   if (token) {
-    // console.log("token in bootstrapAppData: ", token);
     const data = await client("bootstrap", { token });
     // console.log("data in MY app from bootstrap endpoint: ", data);
     queryCache.setQueryData("list-items", data.listItems, {

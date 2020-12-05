@@ -1,11 +1,13 @@
+/** @jsxImportSource @emotion/react */
+import { jsx } from "@emotion/react";
+
 import { useListItems } from "../utils/list-items";
 import { BookListUL } from "./lib";
 import { BookRow } from "./book-row";
+//import {Profiler} from './profiler'
 
 function ListItemList({ filterListItems, noListItems, noFilteredListItems }) {
   const listItems = useListItems();
-
-  // console.log("listItems: ", listItems);
 
   const filteredListItems = listItems.filter(filterListItems);
 

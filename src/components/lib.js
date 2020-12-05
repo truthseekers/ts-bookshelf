@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { jsx } from "@emotion/react";
 
-import styled from "@emotion/styled/macro";
 import { Link as RouterLink } from "react-router-dom";
+import styled from "@emotion/styled/macro";
 import { keyframes } from "@emotion/react";
 import * as colors from "../styles/colors"; // should be able to get like this: import * as colors from 'styles/colors'
 import * as mq from "../styles/media-queries"; // should be able to: import * as mq from 'styles/media-queries'

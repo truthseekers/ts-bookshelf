@@ -4,13 +4,14 @@ import { jsx } from "@emotion/react";
 import { Routes, Route, Link as RouterLink, useMatch } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import { Button, ErrorMessage, FullPageErrorFallback } from "./components/lib";
-import { useAuth } from "./context/auth-context";
-import { ReadingListScreen } from "./screens/reading-list";
 import * as mq from "./styles/media-queries";
 import * as colors from "./styles/colors";
-import { DiscoverBooksScreen } from "./screens/discover";
+import { useAuth } from "./context/auth-context";
+import { ReadingListScreen } from "./screens/reading-list";
 import { FinishedScreen } from "./screens/finished";
+import { DiscoverBooksScreen } from "./screens/discover";
 import { BookScreen } from "./screens/book";
+import { NotFoundScreen } from "./screens/not-found";
 
 function ErrorFallback({ error }) {
   return (
@@ -155,7 +156,7 @@ function AppRoutes() {
       <Route path="/finished" element={<FinishedScreen />} />
       <Route path="/discover" element={<DiscoverBooksScreen />} />
       <Route path="/book/:bookId" element={<BookScreen />} />
-      {/* <Route path="*" element={<NotFoundScreen />} /> */}
+      <Route path="*" element={<NotFoundScreen />} />
     </Routes>
   );
 }

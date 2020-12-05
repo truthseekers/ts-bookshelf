@@ -2,19 +2,24 @@
 import { jsx } from "@emotion/react";
 
 import * as React from "react";
-import * as colors from "../styles/colors";
-import { FaSearch, FaTimes } from "react-icons/fa";
-import { useBookSearch, setQueryDataForBook } from "../utils/books";
-import { BookListUL, Spinner, Input } from "../components/lib";
-import { BookRow } from "../components/book-row";
 import Tooltip from "@reach/tooltip";
+import { FaSearch, FaTimes } from "react-icons/fa";
+import * as colors from "../styles/colors";
+import { useBookSearch, useRefetchBookSearchQuery } from "../utils/books";
+import { BookRow } from "../components/book-row";
+import { BookListUL, Spinner, Input } from "../components/lib";
+// import {Profiler} from 'components/profiler'
 
 function DiscoverBooksScreen() {
   const [query, setQuery] = React.useState("");
   const [queried, setQueried] = React.useState();
   const { books, error, isLoading, isError, isSuccess } = useBookSearch(query);
-
+  const refetchBookSearchQuery = useRefetchBookSearchQuery();
   // console.log("query: ", query);
+
+  React.useEffect(() => {
+    return () => refetchBookSearchQuery();
+  }, [refetchBookSearchQuery]);
 
   function handleSearchClick(event) {
     event.preventDefault();

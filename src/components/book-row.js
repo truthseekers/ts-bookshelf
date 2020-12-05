@@ -2,21 +2,17 @@
 import { jsx } from "@emotion/react";
 
 import { Link } from "react-router-dom";
-import * as colors from "../styles/colors";
-import * as mq from "../styles/media-queries";
 import { useListItem } from "../utils/list-items";
-import { Rating } from "./rating";
+import * as mq from "../styles/media-queries";
+import * as colors from "../styles/colors";
 import { StatusButtons } from "./status-buttons";
+import { Rating } from "./rating";
 
 function BookRow({ book }) {
   const { title, author, coverImageUrl } = book;
   const listItem = useListItem(book.id);
   const id = `book-row-book-${book.id}`;
 
-  // console.log("book in BookRow: ", book);
-  // console.log("coverimage: ", coverImageUrl);
-  // console.log("synopsis type: ");
-  // console.log(typeof book.synopsis);
   return (
     <div
       css={{

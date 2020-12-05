@@ -32,11 +32,6 @@ async function logout() {
 // so that's why we're not just reusing the client
 const authURL = process.env.REACT_APP_AUTH_URL;
 
-const bodyData = {
-  name: "Juicy",
-  password: "pass123",
-};
-
 async function client(endpoint, data) {
   // console.log("in client");
   const config = {

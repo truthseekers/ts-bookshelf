@@ -1,5 +1,6 @@
-import { useClient } from "../context/auth-context";
+import * as React from "react";
 import { useQuery, queryCache } from "react-query";
+import { useClient } from "../context/auth-context";
 import bookPlaceholderSvg from "../assets/book-placeholder.svg";
 
 const loadingBook = {
@@ -63,8 +64,28 @@ function useBook(bookId) {
   return data ?? loadingBook;
 }
 
-function setQueryDataForBook(book) {
-  //...
+function useRefetchBookSearchQuery() {
+  const client = useClient();
+  return React.useCallback(
+    async function refetchBookSearchQuery() {
+      queryCache.removeQueries("bookSearch");
+      await queryCache.prefetchQuery(getBookSearchConfig(client, ""));
+    },
+    [client]
+  );
 }
 
-export { useBookSearch, setQueryDataForBook, useBook };
+function setQueryDataForBook(book) {
+  queryCache.setQueryData({
+    queryKey: ["book", { bookId: book.id }],
+    queryFn: book,
+    ...bookQueryConfig,
+  });
+}
+
+export {
+  useBookSearch,
+  useRefetchBookSearchQuery,
+  setQueryDataForBook,
+  useBook,
+};
